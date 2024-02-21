@@ -5,6 +5,7 @@ const host = "0.0.0.0";
 const path = require("path");
 const socketIO = require("socket.io");
 const fetch = require("node-fetch");
+const port = process.env.PORT || 3002;
 
 
 const app = express()
@@ -62,7 +63,6 @@ async function addAddress(new_address) {
 }
 
 
-const port = process.env.PORT || 3002;
 require('dotenv').config();
 require('./configs/db.js')()
 app.use(cors());
