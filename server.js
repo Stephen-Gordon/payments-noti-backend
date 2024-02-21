@@ -9,8 +9,8 @@ const port = process.env.PORT || 3002;
 
 
 const app = express()
-    .use(express.static(path.join(__dirname, "public")))
-	.use(express.json())
+    app.use(express.static(path.join(__dirname, "public")))
+	app.use(express.json())
 	.post("/alchemyhook", (req, res) => {
 		notificationReceived(req);
 		res.status(200).end();
