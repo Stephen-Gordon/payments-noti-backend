@@ -1,5 +1,16 @@
 const { Schema, model } = require('mongoose')
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
+  
+    address: {
+        type: String,
+    },
+    subscription: {
+        type: Object,
+    },
+  
+    
+}, {timestamps: true});
 
-});
+
+module.exports = model('User', userSchema);

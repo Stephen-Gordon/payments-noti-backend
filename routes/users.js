@@ -1,17 +1,13 @@
 const express = require('express');
+
 const router = express.Router();
 
-const { readData, readOne, createData, updateData, deleteData } = require('../Controllers/user.controller')
+const { profile, register } = require('../Controllers/user.controller')
 
-//import your routes from the controller
-//export them to the server
 
 router
-    .get('/', readData)
-    .get('/:id', readOne)
-    .post('/', createData)
-    .put('/:id', updateData)
-    .delete('/:id', deleteData)
+    .get('/:id', profile)
+    .post('/register', register)
 
 
 module.exports = router;
