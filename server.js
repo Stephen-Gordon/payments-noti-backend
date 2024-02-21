@@ -47,7 +47,7 @@ const notificationReceived = async (req, res) => {
 async function addAddress(new_address) {
 	console.log("Adding address:", new_address);
 	const body = {
-		webhook_id: "wh_eddaxijt09kqs3zh",
+		webhook_id: "wh_dnf6zvqpsvkd2p7t",
 		addresses_to_add: [new_address],
 		addresses_to_remove: [],
 	};
