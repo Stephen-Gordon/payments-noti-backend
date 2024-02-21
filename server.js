@@ -40,6 +40,23 @@ io.on("connection", (socket) => {
 const notificationReceived = async (req, res) => {
 	console.log("Notification received!");
 	console.log("Event:", req?.body?.event?.activity[0]?.toAddress);
+    const sub = await fetch(
+			`https://payments-backend-01-0651b5f97107.herokuapp.com/api/users/${req?.body?.event?.activity[0]?.toAddress}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+        
+    if (sub) {
+        console.log("Sub:", sub);
+        
+    }
+
+
+
 	io.emit("notification", JSON.stringify(req.body));
 };
 
