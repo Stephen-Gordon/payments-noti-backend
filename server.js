@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
 // notification received from Alchemy from the webhook. Let the clients know.
 const notificationReceived = async (req, res) => {
   console.log("notification received!");
-  //console.log("event hereeeeeeeeee", req?.body?.event?.activity[0]?.toAddress);
+  console.log("event hereeeeeeeeee", req?.body?.event?.activity[0]?.toAddress);
 
 
   io.emit('notification', JSON.stringify(req.body));
