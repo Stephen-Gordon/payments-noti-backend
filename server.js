@@ -16,7 +16,7 @@ const app = express()
 		res.status(200).end();
 	})
 	.get("/*", (req, res) => res.sendFile(path.join(__dirname + "/index.html")))
-	.listen(PORT, () => console.log(`Listening on ${PORT}`));
+	.listen(port, () => console.log(`Listening on ${port}`));
 
 // start the websocket server
 const io = socketIO(app);
