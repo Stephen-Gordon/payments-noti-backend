@@ -49,9 +49,9 @@ const notificationReceived = async (req, res) => {
 				},
 			}
 		);
-        const data = await response.json();
 
-				console.log("response data here",data);
+
+        console.log("response data here", response.data);
     /* if (response) {
 			console.log("response sub:", response.subscription);
 			try {
@@ -72,8 +72,8 @@ const notificationReceived = async (req, res) => {
 		} */
 
 
-
-	io.emit("notification", JSON.stringify(req.body));
+/* 
+	io.emit("notification", JSON.stringify(req.body)); */
 };
 
 // Add an address to a notification in Alchemy
