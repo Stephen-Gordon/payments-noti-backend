@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
 const notificationReceived = async (req, res) => {
 	console.log("Notification received!");
 	console.log("Event:", req?.body?.event?.activity[0]?.toAddress);
-    const sub = await fetch(
+    const response = await fetch(
 			`https://payments-backend-01-0651b5f97107.herokuapp.com/api/users/${req?.body?.event?.activity[0]?.fromAddress}`,
 			{
 				method: "GET",
@@ -50,25 +50,24 @@ const notificationReceived = async (req, res) => {
 			}
 		);
         
-    if (sub) {
-        console.log("Sub:", sub);
-        try {
-            await fetch("https://payments-lyart.vercel.app/notification", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                },
-                body: JSON.stringify({
-                    subscription: sub,
-                    message: `Hello from server, ${req?.body?.event?.activity[0]?.fromAddress}!`,
-                }),
-                
-            });
-            console.log("Notification sent!");
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    if (response) {
+			console.log("response sub:", response.subscription);
+			try {
+				await fetch("https://payments-lyart.vercel.app/notification", {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json",
+					},
+					body: JSON.stringify({
+						subscription: response.subscription,
+						message: `Hello from server, ${req?.body?.event?.activity[0]?.fromAddress}!`,
+					}),
+				});
+				console.log("Notification sent!");
+			} catch (error) {
+				console.log(error);
+			}
+		}
 
 
 
