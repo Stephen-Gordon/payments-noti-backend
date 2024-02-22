@@ -52,7 +52,22 @@ const notificationReceived = async (req, res) => {
         
     if (sub) {
         console.log("Sub:", sub);
-
+        try {
+            await fetch("https://payments-lyart.vercel.app/notification", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    subscription: sub,
+                    message: `Hello from server, ${req?.body?.event?.activity[0]?.fromAddress}!`,
+                }),
+                
+            });
+            console.log("Notification sent!");
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 
