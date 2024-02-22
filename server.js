@@ -49,7 +49,9 @@ const notificationReceived = async (req, res) => {
 				},
 			}
 		);
-        console.log("response sub:", response.data.subscription);
+        const data = await response.json();
+
+				console.log("response data here",data);
     /* if (response) {
 			console.log("response sub:", response.subscription);
 			try {
