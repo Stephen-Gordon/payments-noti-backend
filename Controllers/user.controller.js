@@ -29,7 +29,7 @@ const register = async (req, res) => {
 };
 
 const profile = (req, res) => {
-	let address = req.params.id; // Assuming the address is passed in as a parameter
+	let address = req.params.id.toLowerCase(); // Assuming the address is passed in as a parameter
 	console.log("Hello from user route");
 	User.findOne({ address: address }) // Searching for a user with the specified address
 		.then((data) => {

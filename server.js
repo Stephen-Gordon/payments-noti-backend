@@ -59,6 +59,8 @@ const notificationReceived = async (req, res) => {
 	console.log("Notification received!");
         console.log("to address:", req?.body?.event?.activity[0]?.toAddress);
         console.log("from address:", req?.body?.event?.activity[0]?.fromAddress);
+        const toAddress = req?.body?.event?.activity[0]?.toAddress.toLowerCase();
+        const fromAddress = req?.body?.event?.activity[0]?.fromAddress.toLowerCase();
     try {
         const response = await axios.get(
             `https://payments-backend-01-0651b5f97107.herokuapp.com/api/users/${req?.body?.event?.activity[0]?.fromAddress}`,
@@ -76,8 +78,8 @@ const notificationReceived = async (req, res) => {
 
 
         
-    /* if (response) {
-			console.log("response sub:", response.subscription);
+     if (response) {
+			console.log("response sub:", response.data.subscription);
 			try {
 				await fetch("https://payments-lyart.vercel.app/notification", {
 					method: "POST",
@@ -85,7 +87,7 @@ const notificationReceived = async (req, res) => {
 						"Content-type": "application/json",
 					},
 					body: JSON.stringify({
-						subscription: response.datasubscription,
+						subscription: response.data.subscription,
 						message: `Hello from server, ${req?.body?.event?.activity[0]?.fromAddress}!`,
 					}),
 				});
@@ -93,7 +95,7 @@ const notificationReceived = async (req, res) => {
 			} catch (error) {
 				console.log(error);
 			}
-		} */
+		} 
 
 
 /* 
