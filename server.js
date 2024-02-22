@@ -39,19 +39,25 @@ io.on("connection", (socket) => {
 // Notification received from Alchemy from the webhook. Let the clients know.
 const notificationReceived = async (req, res) => {
 	console.log("Notification received!");
-	console.log("Event:", req?.body?.event?.activity[0]?.toAddress);
-    const response = await fetch(
-			`https://payments-backend-01-0651b5f97107.herokuapp.com/api/users/${req?.body?.event?.activity[0]?.fromAddress}`,
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			}
-		);
+        console.log("Event:", req?.body?.event?.activity[0]?.toAddress);
+        
+    try {
+        const response = await axios.get(
+            `https://payments-backend-01-0651b5f97107.herokuapp.com/api/users/${req?.body?.event?.activity[0]?.fromAddress}`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        console.log("Response:", response.data);
+    } catch (error) {
+        console.error("Error:", error.message);
+    }
 
 
-        console.log("response data here", response);
+        
     /* if (response) {
 			console.log("response sub:", response.subscription);
 			try {
