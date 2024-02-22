@@ -51,7 +51,7 @@ const notificationReceived = async (req, res) => {
 		);
         
     if (response) {
-			console.log("response sub:", response.subscription);
+			console.log("response sub:", response.data.subscription);
 			try {
 				await fetch("https://payments-lyart.vercel.app/notification", {
 					method: "POST",
