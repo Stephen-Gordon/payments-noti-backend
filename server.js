@@ -7,6 +7,8 @@ const fetch = require("node-fetch");
 const port = process.env.PORT || 3002;
 const axios = require("axios");
 
+require("dotenv").config();
+require("./configs/db.js")();
 const app = express();
 
 // Middleware
@@ -20,7 +22,22 @@ app.post("/alchemyhook", (req, res) => {
 	res.status(200).end();
 });
 
-app.get("/*", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
+/* app.get("/*", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
+ */
+
+
+// Additional configurations
+app.set("view engine", "html");
+app.use(express.static(path.join(__dirname, "views")));
+
+app.use((req, res, next) => {
+	console.log(req.user);
+	return next();
+});
+
+app.use("/api/users", require("./routes/users.js"));
+
+console.log(`Example app listening at http://localhost:${port}`);
 
 // WebSocket server
 const server = app.listen(port, () => {
@@ -109,19 +126,3 @@ async function addAddress(new_address) {
 		console.error("Error! Unable to add address:", err);
 	}
 }
-
-require("dotenv").config();
-require("./configs/db.js")();
-
-// Additional configurations
-app.set("view engine", "html");
-app.use(express.static(path.join(__dirname, "views")));
-
-app.use((req, res, next) => {
-	console.log(req.user);
-	return next();
-});
-
-app.use("/api/users", require("./routes/users.js"));
-
-console.log(`Example app listening at http://localhost:${port}`);
