@@ -72,30 +72,23 @@ const notificationReceived = async (req, res) => {
         );
 
         console.log("Response:", response.data);
+        await fetch("https://payments-lyart.vercel.app/notification", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+                subscription: response.data.subscription,
+                message: `Hello from server, ${req?.body?.event?.activity[0]?.fromAddress}!`,
+            }),
+        });
+        console.log("Notification sent!");
+        
+
     } catch (error) {
         console.error("Error:", error.message);
     }
 
-
-        
-     if (response) {
-			console.log("response sub:", response.data.subscription);
-			try {
-				await fetch("https://payments-lyart.vercel.app/notification", {
-					method: "POST",
-					headers: {
-						"Content-type": "application/json",
-					},
-					body: JSON.stringify({
-						subscription: response.data.subscription,
-						message: `Hello from server, ${req?.body?.event?.activity[0]?.fromAddress}!`,
-					}),
-				});
-				console.log("Notification sent!");
-			} catch (error) {
-				console.log(error);
-			}
-		} 
 
 
 /* 
