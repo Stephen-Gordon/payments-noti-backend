@@ -59,11 +59,12 @@ const notificationReceived = async (req, res) => {
 	console.log("Notification received!");
         console.log("to address:", req?.body?.event?.activity[0]?.toAddress);
         console.log("from address:", req?.body?.event?.activity[0]?.fromAddress);
+		console.log("balance", req.body?.event?.activity[0]);
         const toAddress = req?.body?.event?.activity[0]?.toAddress.toLowerCase();
         const fromAddress = req?.body?.event?.activity[0]?.fromAddress.toLowerCase();
     try {
         const response = await axios.get(
-            `https://payments-backend-01-0651b5f97107.herokuapp.com/api/users/${req?.body?.event?.activity[0]?.fromAddress}`,
+            `https://payments-backend-01-0651b5f97107.herokuapp.com/api/users/${req?.body?.event?.activity[0]?.toAddress}`,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -79,12 +80,12 @@ const notificationReceived = async (req, res) => {
             },
             body: JSON.stringify({
                 subscription: response.data.subscription,
-                message: `Hello from server, ${req?.body?.event?.activity[0]?.fromAddress}!`,
+                message: `Hey you received  ${req?.body?.event?.activity[0]?.fromAddress}!`,
             }),
         });
         console.log("Notification sent!");
         
-
+;
     } catch (error) {
         console.error("Error:", error.message);
     }
