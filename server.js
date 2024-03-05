@@ -97,29 +97,4 @@ const notificationReceived = async (req, res) => {
 	io.emit("notification", JSON.stringify(req.body)); */
 };
 
-// Add an address to a notification in Alchemy
-async function addAddress(new_address) {
-	console.log("Adding address:", new_address);
-	const body = {
-		webhook_id: "wh_dnf6zvqpsvkd2p7t",
-		addresses_to_add: [new_address],
-		addresses_to_remove: [],
-	};
-	try {
-		const response = await fetch(
-			"https://dashboard.alchemyapi.io/api/update-webhook-addresses",
-			{
-				method: "PATCH",
-				body: JSON.stringify(body),
-				headers: {
-					"Content-Type": "application/json",
-					"X-Alchemy-Token": "2CxWNMpNMB3IeHKVJBROFv-19LQ3LKKQ",
-				},
-			}
-		);
-		const json = await response.json();
-		console.log("Successfully added address:", json);
-	} catch (err) {
-		console.error("Error! Unable to add address:", err);
-	}
-}
+
