@@ -74,7 +74,7 @@ const readOne = async (req, res) => {
 async function addAddress(new_address) {
 	console.log("Adding address:", new_address);
 	const body = {
-		webhook_id: "wh_l76moyfcu9scr1rv",
+		webhook_id: "wh_s9bldofkz7426pen",
 		addresses_to_add: [new_address],
 		addresses_to_remove: [],
 	};
