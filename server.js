@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
 
 // Notification received from Alchemy from the webhook. Let the clients know.
 const notificationReceived = async (req, res) => {
-	console.log("Notification received!");
+	    console.log("Notification received!");
         console.log("to address:", req?.body?.event?.activity[0]?.toAddress);
         console.log("from address:", req?.body?.event?.activity[0]?.fromAddress);
 		const balance = req.body?.event?.activity[0].value	
